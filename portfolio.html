@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hasan Qutab - Project Portfolio - Web Development, Design, and More">
+    <link rel="icon" type="image/png" href="hq.png">
+    <title>Portfolio | Hasan Qutab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* =======================
+           Base Variables & Theme
+        ======================= */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #2d3436;
+            --primary-color: #ff6b6b;
+            --primary-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            --secondary-color: #4dabf7;
+            --accent-color: #51cf66;
+            --card-bg: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --primary-color: #ff6b6b;
+            --primary-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            --secondary-color: #74c0fc;
+            --accent-color: #69db7c;
+            --card-bg: #1e1e1e;
+            --border-color: #2d3436;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(30, 30, 30, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* =======================
+           Global Reset & Body
+        ======================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            transition: var(--transition);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 107, 107, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(77, 171, 247, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* =======================
+           Navigation - Glass Morphism
+        ======================= */
+        .navbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background-color: var(--bg-color);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-color);
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "🚀";
+            font-size: 1.5rem;
+            -webkit-text-fill-color: initial;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::before {
+            width: 100%;
+        }
+
+        /* Theme Toggle - Enhanced */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 0 20px var(--shadow-hover);
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover::after {
+            opacity: 0.2;
+        }
+
+        .theme-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 1.3rem;
+            display: none;
+        }
+
+        [data-theme="light"] .theme-icon.light,
+        [data-theme="dark"] .theme-icon.dark {
+            display: block;
+        }
+
+        /* Mobile Menu - Improved */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .mobile-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* =======================
+           Page Header - Hero Style
+        ======================= */
+        .page-header {
+            padding: 8rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--card-bg);
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-color);
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* =======================
+           Sections - Enhanced
+        ======================= */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: var(--card-bg);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--text-color);
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 6px;
+            background: var(--primary-gradient);
+            margin: 1.5rem auto 0;
+            border-radius: 3px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* =======================
+           Portfolio Filters
+        ======================= */
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.8rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .filter-btn:hover {
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .filter-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =======================
+           Portfolio Grid
+        ======================= */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .portfolio-item {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: var(--transition);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .portfolio-item.show {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .portfolio-item.hide {
+            display: none;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow-hover);
+        }
+
+        .portfolio-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-image::after {
+            opacity: 0.2;
+        }
+
+        .portfolio-info {
+            padding: 2rem;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .portfolio-info p {
+            color: var(--text-color);
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .portfolio-tag {
+            background: var(--card-bg);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-tag {
+            border-color: var(--primary-color);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        /* Category Badges */
+        .portfolio-category {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1.2rem;
+            background: var(--primary-gradient);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 50px;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* =======================
+           Project Modal
+        ======================= */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .project-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+        }
+
+        .project-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 3;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            background: var(--text-color);
+        }
+
+        /* =======================
+           Footer - Enhanced
+        ======================= */
+        .footer {
+            background: var(--card-bg);
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            text-decoration: none;
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer p {
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* =======================
+           Back to Top Button
+        ======================= */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 5px 20px var(--shadow-hover);
+            z-index: 1000;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            animation: bounce 2s infinite;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =======================
+           Animations & Effects
+        ======================= */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+
+        /* =======================
+           Responsive Design
+        ======================= */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-color);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-header {
+                padding: 6rem 0 4rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .portfolio-item {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .project-filters {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .portfolio-info {
+                padding: 1.5rem;
+            }
+
+            .portfolio-info h3 {
+                font-size: 1.3rem;
+            }
+
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                right: 1rem;
+                bottom: 1rem;
+            }
+        }
+/* Chatbot Button */
+.chatbot-btn {
+    position: fixed;
+    bottom: 100px;  /* Increased from 30px to 100px to be above the back-to-top button */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;  /* Reduced from 1000 to be below the back-to-top button */
+    transition: all 0.3s ease;
+}
+/* Add this if you want a pulsing animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.chatbot-btn.pulse {
+    animation: pulse 2s infinite;
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Hasan Qutab</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li><a class="nav-link" href="about.html">About</a></li>
+                <li><a class="nav-link" href="services.html">Services</a></li>
+                <li><a class="nav-link active" href="portfolio.html">Portfolio</a></li>
+                <li><a class="nav-link" href="contact.html">Contact</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon light"><i class="fas fa-sun"></i></span>
+                        <span class="theme-icon dark"><i class="fas fa-moon"></i></span>
+                    </button>
+                </li>
+            </ul>
+            <button class="mobile-menu" id="mobile-menu" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Portfolio Header -->
+    <header class="page-header">
+        <div class="container animate-fade-in">
+            <h1>My Projects</h1>
+            <p class="animate-fade-in delay-1">A curated collection of my recent work showcasing web development, automation, and technical expertise.</p>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <!-- Filters -->
+            <div class="project-filters animate-fade-in delay-1">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="python">Python Automation</button>
+                <button class="filter-btn" data-filter="hackintosh">Hackintosh</button>
+                <button class="filter-btn" data-filter="experiments">Experiments</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+
+                <!-- Project 1 -->
+                <div class="portfolio-item animate-fade-in delay-2" data-category="web">
+                    <div class="portfolio-category">Web</div>
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHl0aG9uJTIwY29kZXxlbnwwfHwwfHx8MA%3D%3D" alt="Website Clone">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Full Website Clone</h3>
+                        <p>A complete front-end clone built using HTML, Tailwind CSS, and Vanilla JS — optimized for speed and responsiveness with modern UI/UX patterns.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">HTML5</span>
+                            <span class="portfolio-tag">Tailwind CSS</span>
+                            <span class="portfolio-tag">JavaScript</span>
+                            <span class="portfolio-tag">Responsive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item animate-fade-in delay-3" data-category="python">
+                    <div class="portfolio-category">Python</div>
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdlYiUyMGRldmVsb3BtZW50fGVufDB8fDB8fHww" alt="Python Automation">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Video Automation System</h3>
+                        <p>A powerful Python automation system that processes, edits, and optimizes videos with custom intros, music, and effects using FFmpeg integration.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Python</span>
+                            <span class="portfolio-tag">Automation</span>
+                            <span class="portfolio-tag">FFmpeg</span>
+                            <span class="portfolio-tag">OpenCV</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item animate-fade-in delay-4" data-category="hackintosh">
+                    <div class="portfolio-category">Hackintosh</div>
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHl0aG9uJTIwY29kZXxlbnwwfHwwfHx8MA%3D%3D" alt="Hackintosh">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Ryzen Hackintosh EFI</h3>
+                        <p>Fully functional OpenCore EFI configuration for AMD Ryzen 5 3550H with Vega 8 graphics acceleration, optimized for macOS Big Sur and later.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">OpenCore</span>
+                            <span class="portfolio-tag">AMD Ryzen</span>
+                            <span class="portfolio-tag">macOS</span>
+                            <span class="portfolio-tag">ACPI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-item animate-fade-in delay-5" data-category="web">
+                    <div class="portfolio-category">Web</div>
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBvcnRmb2xpb3xlbnwwfHwwfHx8MA%3D%3D" alt="Portfolio Site">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Personal Portfolio</h3>
+                        <p>A modern, responsive portfolio website with dark/light themes, smooth animations, and dynamic project filtering.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">UI/UX Design</span>
+                            <span class="portfolio-tag">Frontend</span>
+                            <span class="portfolio-tag">Animations</span>
+                            <span class="portfolio-tag">Theming</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-item animate-fade-in delay-6" data-category="experiments">
+                    <div class="portfolio-category">Experiments</div>
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGludXglMjByb3V0ZXJ8ZW58MHx8MHx8fDA%3D" alt="OpenWRT Router">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>OpenWRT Router Build</h3>
+                        <p>Custom x86 router setup with OpenWRT, advanced firewall rules, VLAN segmentation, and network performance optimization.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Linux</span>
+                            <span class="portfolio-tag">Networking</span>
+                            <span class="portfolio-tag">OpenWRT</span>
+                            <span class="portfolio-tag">Security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-item animate-fade-in delay-6" data-category="python">
+                    <div class="portfolio-category">Python</div>
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHl0aG9uJTIwYm90fGVufDB8fDB8fHww" alt="Discord Bot">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Discord Bot Platform</h3>
+                        <p>Feature-rich Discord bot with custom commands, moderation tools, music playback, and API integrations using Discord.py.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Discord.py</span>
+                            <span class="portfolio-tag">Bot Development</span>
+                            <span class="portfolio-tag">API Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p>&copy; <span id="year"></span> Hasan Qutab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Project Modal -->
+    <div class="project-modal" id="project-modal">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <div class="modal-content" id="modal-content">
+            <!-- Content will be injected here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            }
+
+            themeToggle.addEventListener('click', toggleTheme);
+            themeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            });
+
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            const navItems = document.querySelectorAll('.nav-links a');
+
+            if (mobileMenu && navLinks) {
+                mobileMenu.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                });
+
+                navItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!navLinks.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 768) {
+                        mobileMenu.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // Update copyright year
+            const yearElement = document.getElementById('year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+
+            // Back to top button
+            const backToTop = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Portfolio filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    // Filter portfolio items
+                    portfolioItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        
+                        if (filter === 'all' || filter === category) {
+                            item.classList.remove('hide');
+                            setTimeout(() => {
+                                item.classList.add('show');
+                            }, 10);
+                        } else {
+                            item.classList.remove('show');
+                            setTimeout(() => {
+                                item.classList.add('hide');
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Initialize portfolio items with animation
+            portfolioItems.forEach((item, index) => {
+                item.style.animationDelay = `${(index + 1) * 0.1}s`;
+                setTimeout(() => {
+                    item.classList.add('show');
+                }, (index + 1) * 100);
+            });
+
+            // Project modal functionality
+            const projectModal = document.getElementById('project-modal');
+            const modalClose = document.getElementById('modal-close');
+            const modalContent = document.getElementById('modal-content');
+
+            // Add click handlers to portfolio items
+            portfolioItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const title = item.querySelector('h3').textContent;
+                    const description = item.querySelector('p').textContent;
+                    const imageSrc = item.querySelector('img').src;
+                    const tags = Array.from(item.querySelectorAll('.portfolio-tag')).map(tag => tag.textContent);
+                    const category = item.querySelector('.portfolio-category').textContent;
+
+                    // Create modal content
+                    modalContent.innerHTML = `
+                        <div style="padding: 2rem;">
+                            <div style="margin-bottom: 2rem;">
+                                <img src="${imageSrc}" alt="${title}" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h2 style="font-size: 2rem; margin: 0; color: var(--text-color);">${title}</h2>
+                                    <span style="background: var(--primary-gradient); color: white; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600;">${category}</span>
+                                </div>
+                                <p style="color: var(--text-color); opacity: 0.9; line-height: 1.8; margin-bottom: 1.5rem;">${description}</p>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-color);">Technologies Used</h3>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
+                                    ${tags.map(tag => `<span style="background: var(--card-bg); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.9rem; border: 1px solid var(--border-color);">${tag}</span>`).join('')}
+                                </div>
+                                <div style="display: flex; gap: 1rem;">
+                                    <button style="padding: 0.8rem 2rem; background: var(--primary-gradient); color: white; border: none; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: var(--transition);">
+                                        <i class="fas fa-eye"></i> Live Demo
+                                    </button>
+                                    <button style="padding: 0.8rem 2rem; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: var(--transition);">
+                                        <i class="fab fa-github"></i> View Code
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    // Show modal
+                    projectModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close modal
+            modalClose.addEventListener('click', () => {
+                projectModal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Close modal on outside click
+            projectModal.addEventListener('click', (e) => {
+                if (e.target === projectModal) {
+                    projectModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+                    projectModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+        // Chatbot functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbotButton = document.getElementById('chatbotButton');
+    
+    if (chatbotButton) {
+        chatbotButton.addEventListener('click', function() {
+            
+            alert('Chat feature coming soon!');
+            
+        });
+    }
+});
+    </script>
+<!-- Chatbot Button -->
+<button class="chatbot-btn pulse" id="chatbotButton" aria-label="Chat with us">
+    <i class="fas fa-comment-dots"></i>
+</button>
+</body>
+
+</html>
